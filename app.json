@@ -2,7 +2,7 @@
   "expo": {
     "name": "WaysToDo",
     "slug": "WaysToDo",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -23,10 +23,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.dzuuuuul.WaysToDo"
     },
     "web": {
       "favicon": "./assets/icon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "553e6953-35d0-4143-bd4f-28360b306b1b"
+      }
     }
   }
 }

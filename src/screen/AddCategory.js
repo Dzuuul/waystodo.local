@@ -27,7 +27,7 @@ function AddCategory({ navigation }) {
   const categoryColor = [
     {
       index: 0,
-      bgColor: "primary.500",
+      bgColor: "danger.500",
     },
     {
       index: 1,
@@ -39,7 +39,7 @@ function AddCategory({ navigation }) {
     },
     {
       index: 3,
-      bgColor: "danger.500",
+      bgColor: "primary.500",
     },
     {
       index: 4,

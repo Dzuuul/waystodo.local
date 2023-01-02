@@ -18,6 +18,7 @@ import { showMessage } from "react-native-flash-message";
 import { useQuery } from "react-query";
 import ChecklistImage from "../../assets/checklist.png";
 import DefaultProfile from "../../assets/profile.jpg";
+import { DeleteIcon } from "native-base";
 import { API } from "../../config/api";
 import { UserContext } from "../../context/UserContext";
 
@@ -166,6 +167,19 @@ function Home({ navigation }) {
     }
   }
 
+  async function handleDelete(e, id_todo) {
+    e.preventDefault();
+    try {
+      await API.delete(`/List/${id_todo}`);
+      listRefetch();
+    } catch (err) {
+      showMessage({
+        message: "Delete todo failed!",
+        type: "danger",
+      });
+    }
+  }
+
   useEffect(() => {
     listRefetch();
   }, []);
@@ -221,7 +235,7 @@ function Home({ navigation }) {
               size={15}
               color="muted.500"
               style={{ marginRight: 5 }}
-            /> {" "}
+            />{" "}
             {milisToDate(item.date)}
           </Text>
         </Box>
@@ -247,8 +261,8 @@ function Home({ navigation }) {
             <Button
               bg={listBgColor}
               borderRadius={100}
-              _hover={{ backgroundColor: {listBgColor} }}
-              _pressed={{ backgroundColor: {listBgColor} }}
+              _hover={{ backgroundColor: { listBgColor } }}
+              _pressed={{ backgroundColor: { listBgColor } }}
               mt={2}
               onPress={(e) => handleUpdateIsDone(e, item._id, item.is_done)}
             >
@@ -276,6 +290,17 @@ function Home({ navigation }) {
                 </>
               )}
             </Button>
+            <Box flex={1}>
+              <Button
+                h={6}
+                bg={listBgColor}
+                _hover={{ backgroundColor: { listBgColor } }}
+                _pressed={{ backgroundColor: { listBgColor } }}
+                onPress={(e) => handleDelete(e, item._id)}
+              >
+                <DeleteIcon />
+              </Button>
+            </Box>
           </Box>
         </Box>
       </Pressable>
@@ -302,7 +327,7 @@ function Home({ navigation }) {
         {/* profile  */}
         <Box flex={1} justifyContent="center" mx={2}>
           <Text fontWeight="bold" fontSize={30}>
-            Hi {state?.data?.user?.firstName}
+            Hi {state?.data?.user?.firstName}!
           </Text>
           <Text fontSize={15} color="error.500">
             {list && Object.keys(list).length} Lists
